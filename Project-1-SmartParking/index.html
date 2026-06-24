@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ParkIQ — Smart Parking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Navbar ── -->
+  <header class="navbar" id="navbar">
+    <a class="logo" href="#home">Park<span>IQ</span></a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#slots">Live Map</a>
+      <a href="#stats">Stats</a>
+      <a href="#booking">Book</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle">&#9776;</button>
+  </header>
+
+  <!-- ── Hero ── -->
+  <section class="hero" id="home">
+    <div class="hero-badge">LIVE AVAILABILITY</div>
+    <h1>Parking<br /><em>without</em><br />the hunt.</h1>
+    <p>Reserve your spot in seconds. Real-time availability, zero guesswork.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn btn-primary">Reserve a Slot</a>
+      <a href="#slots" class="btn btn-ghost">View Live Map</a>
+    </div>
+    <div class="hero-ticker">
+      <span class="ticker-dot available-dot"></span>
+      <span id="heroAvailable">—</span> slots available right now
+    </div>
+  </section>
+
+  <!-- ── About ── -->
+  <section id="about" class="section about-section">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="eyebrow">About ParkIQ</span>
+        <h2>Smarter parking starts here</h2>
+        <p>ParkIQ reduces urban traffic congestion by connecting drivers to real-time space data. No more circling blocks — book ahead or walk in and find your spot instantly.</p>
+      </div>
+      <div class="about-features">
+        <div class="feature-pill">⚡ Real-time Updates</div>
+        <div class="feature-pill">🔒 Secure Booking</div>
+        <div class="feature-pill">📱 Mobile Friendly</div>
+        <div class="feature-pill">🗺 Live Slot Map</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Slots ── -->
+  <section id="slots" class="section">
+    <span class="eyebrow">Live Map</span>
+    <h2>Parking Availability</h2>
+    <div class="slot-legend">
+      <span><i class="dot available-dot"></i> Available</span>
+      <span><i class="dot occupied-dot"></i> Occupied</span>
+    </div>
+    <div class="slot-container" id="slotContainer">
+      <!-- injected by JS -->
+    </div>
+  </section>
+
+  <!-- ── Stats ── -->
+  <section id="stats" class="section stats-section">
+    <span class="eyebrow">Overview</span>
+    <h2>Parking Statistics</h2>
+    <div class="stats-grid">
+      <div class="stat-card total">
+        <div class="stat-number counter" data-target="8" id="statTotal">0</div>
+        <div class="stat-label">Total Slots</div>
+      </div>
+      <div class="stat-card occupied">
+        <div class="stat-number counter" data-target="0" id="statOccupied">0</div>
+        <div class="stat-label">Occupied</div>
+      </div>
+      <div class="stat-card available">
+        <div class="stat-number counter" data-target="8" id="statAvailable">0</div>
+        <div class="stat-label">Available</div>
+      </div>
+    </div>
+    <div class="occupancy-bar-wrap">
+      <div class="occupancy-bar" id="occupancyBar"></div>
+    </div>
+    <p class="occupancy-label" id="occupancyLabel">Calculating…</p>
+  </section>
+
+  <!-- ── Booking ── -->
+  <section id="booking" class="section booking-section">
+    <span class="eyebrow">Reservation</span>
+    <h2>Book a Parking Slot</h2>
+    <div class="booking-card">
+      <div id="bookingMsg" class="booking-msg hidden"></div>
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="e.g. Ahmed Khan" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="vehicle">Vehicle Number</label>
+        <input type="text" id="vehicle" placeholder="e.g. LEA-1234" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="type">Vehicle Type</label>
+        <select id="type">
+          <option value="">Select type…</option>
+          <option>Car</option>
+          <option>Bike</option>
+          <option>Van</option>
+        </select>
+      </div>
+      <button id="reserveBtn" class="btn btn-primary full">Reserve Slot</button>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section id="contact" class="section contact-section">
+    <span class="eyebrow">Get in Touch</span>
+    <h2>Contact Us</h2>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-icon">✉</div>
+        <div>
+          <p class="contact-label">Email</p>
+          <p>support@parkiq.pk</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <p class="contact-label">Phone</p>
+          <p>+92 312 345 6789</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <span class="logo">Park<span>IQ</span></span>
+    <p>© 2026 ParkIQ. Built with HTML, CSS & Node.js.</p>
+  </footer>
+
+  <!-- ── Cancel Modal ── -->
+  <div class="modal-overlay hidden" id="cancelModal">
+    <div class="modal">
+      <h3>Cancel Slot <span id="modalSlotId"></span>?</h3>
+      <p>This will free the spot for other drivers.</p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="cancelNo">Keep It</button>
+        <button class="btn btn-danger" id="cancelYes">Yes, Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
